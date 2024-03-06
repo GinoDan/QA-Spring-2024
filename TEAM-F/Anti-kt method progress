@@ -1,0 +1,28 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+from math import *
+
+data= pd.read_csv("3D_randgen.csv")#reading data with pandas
+print(data)#just checked to make sure data was in the datagram
+dfnew=data.sort_values(by='momentum', ascending=False)#sorted values in the datafram
+x= len(dfnew['momentum']) #finding N value 
+x1= range(1,x+1)#range is x+1 since range doesnt include last number
+y= dfnew['momentum']#making array of y values
+plt.bar(x1,y)#plotting all y momentum values
+
+y1=((dfnew['momentum'])**2)#making value for inverse squared plot
+newy= 1/y1#creating new y value to plot for inverse square plt
+xnew=range(1,x+1)#same range since same number of particles
+plt.bar(xnew,newy)#plotting the inverse square graph
+area = np.trapz(y, x)#finding the area under the curve using numpys method
+print(area)
+N=66#setting our N value=66 
+deltaavg2=(area/N)#calculating delta avg squared
+print(deltaavg2)
+k1med=np.median(y)#finding median of k1
+print(k1med)
+avgdij=pi*k1med*deltaavg2#calculating average dij with out prediction for R^2=1/pi
+
+
+print(avgdij)
